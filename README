@@ -1,0 +1,102 @@
+Name: Ahmad Amin, Yash Bhandari & Nibras Alam
+ID: 1623338, 1616539 & 1617818
+CMPUT 275, Winter 2020
+
+Final Project
+
+Consulted C++ and Python Documentation
+Consulted Wikipedia for Strassen Algorithm
+https://drive.google.com/file/d/1zy600bM6sMqngqi0rIDYFjCPg2HUUNCe/view?usp=sharing
+
+Included Files/Directories:
+	*matpy/
+		*include/
+		*src/
+		*__init__.py
+		*matrix.py
+	
+	*tests/
+		*Matrix/
+		*__init__.py
+	
+	*client.py
+	*Makefile
+	*README
+
+matpy/ -----------------------------------
+
+Files Included in matpy/include/:
+	*matrix.h
+	*matrix_ops.h
+
+Files Included in matpy/src/:
+	*binding.cpp
+	*matrix.cpp
+	*matrix_ops.cpp
+
+Notes and Assumptions:
+	-Includes the Matrix library implementations
+	-matrix_ops.cpp contains the non-trivial algorithms (Strassen)
+
+--------------------------------------------------
+
+
+tests/ -----------------------------------
+
+Files Included in tests/Matrix/:
+	*test_data/
+	*__init__.py
+	*multply_test_data.py
+	*test_matrix_addition.py
+	*test_matrix_equality.py
+	*test_matrix_instantiation.py
+	*test_matrix_multiplication.py
+	*test_matrix_multiplication_algorithms.py
+--------------------------------------------------
+
+Our project is centered around a python matrix arithmetic library called matpy (inspired by numpy).
+matpy is a thin wrapper over pre-compiled C++ code, which enhances the performance of computationally
+intense operations like matrix multiplication.
+Within matpy we have implemented the Strassen algorithm for matrix multiplication.
+Due to the numerical stability issues of the algorithm, we limit our library to matrices over the integers.
+
+We also created a sample client that visualizes random walks.
+By exponentiating adjancency matrices, we are able to find the probability of landing on any node of
+a graph after a random walk of a particular length from a particular spot.
+
+We developed a full suite of unit tests to verify the accuracy of matpy.
+These can be found in tests/Matrix.
+
+
+Makefile Targets:
+	- make python-reqs: Ensures required libraries are installed using pip3
+	- make: Links required source and object files
+	- make test: Runs suite of unit tests
+	- make clean: Remove all object files and executables
+
+
+Running Instructions for matpy:
+	Steps 1 and 2 only have to be performed once at project setup
+	1. run "make python-reqs" 
+	2. run "make"
+	3. run "make test" to run our suite of unit tests
+	Look at matpy_example.py for a tutorial/demonstration of the matpy module.
+
+Running Instructions for Random Walk Visualization:
+	Steps 1 and 2 only have to be performed once at project setup
+	1. run "make python-reqs" 
+	2. run "make"
+	3. run "python3 client.py"
+	4. Follow the commandline prompts. 
+	   You will have to specify an undirected graph, as well as the starting position and length
+	   of a random walk.
+	   To specify an edge, enter two space seperated nodes: "3 4" or "5 2". 
+	   A visualization will appear that will depict the nodes of the given graph.
+	   Each node will be colored according to the probability that it would be the end node of a 
+	   random walk starting at the given start node and of the given length.
+	   The nodes will also be labelled with their number and the raw probability.
+
+Quick Notes on Dependencies:
+	ddt and numpy are used for testing
+	networkx and matplotlib are used for the random walk visualizer
+	pybind11 is used to create bindings
